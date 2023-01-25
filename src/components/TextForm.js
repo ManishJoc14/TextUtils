@@ -20,6 +20,7 @@ export default function TextForm(props) {
         var text = document.getElementById('myBox');
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Copied to clipboard","success");
     }
     const handleOnChange = (event) => {
@@ -67,11 +68,11 @@ export default function TextForm(props) {
                 <div className="mb-3">
                     <textarea className="form-control" onFocus={handleOnChange} onBlur={beautifyText} style={{ color: props.mode === 'dark' ? 'white' : 'black', backgroundColor: props.mode === 'dark' ? 'black' : 'white' }} value={text} onChange={handleOnChange} id="myBox" rows="6"></textarea>
                 </div>
-                <button className="btn btn-primary m-2" onClick={handleUpClick} >Convert TO Uppercase</button>
-                <button className="btn btn-primary m-2" onClick={handleLoClick} >Convert TO Lowercase</button>
-                <button className="btn btn-primary m-2" onClick={handleCopyClick} >Copy to clipboard</button>
-                <button className="btn btn-primary m-2" onClick={handleExtraSpaces} >Remove Extra Spaces</button>
-                <button className="btn btn-primary m-2" onClick={handleClearClick} >Clear Text</button>
+                <button disabled={text.length===0} className="btn btn-primary m-2" onClick={handleUpClick} >Convert TO Uppercase</button>
+                <button disabled={text.length===0} className="btn btn-primary m-2" onClick={handleLoClick} >Convert TO Lowercase</button>
+                <button disabled={text.length===0} className="btn btn-primary m-2" onClick={handleCopyClick} >Copy to clipboard</button>
+                <button disabled={text.length===0} className="btn btn-primary m-2" onClick={handleExtraSpaces} >Remove Extra Spaces</button>
+                <button disabled={text.length===0} className="btn btn-primary m-2" onClick={handleClearClick} >Clear Text</button>
             </div>
             <div className="container my-3" >
                 <h2>Your text summary</h2>
